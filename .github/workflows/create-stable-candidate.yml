@@ -13,13 +13,13 @@ jobs:
     steps:
       - name: "GetTime"
         id: get_time
-        runs: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB.OUTPUTS
+        run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB.OUTPUTS
       - name: "Checkout"      
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: "Create Stable Candidate Branch"
-        runs: |
+        run: |
           git checkout -b stable-candidate-${{ steps.get_time.outputs.today }}
           git push --set-upstream origin stable-candidate-${{ steps.get_time.outputs.today }}
         
