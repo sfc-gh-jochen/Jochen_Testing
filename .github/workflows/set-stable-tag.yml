@@ -26,6 +26,8 @@ jobs:
           echo "commit=$(git rev-parse origin/${{ inputs.candidate_branch }})" >> $GITHUB_OUTPUT 
       - name: "Checkout commit and apply tag"
         run: |
+          git config --global user.email "github@github.com"
+          git config --global user.name "GitHub Action Bot"
           git checkout ${{ steps.get_commit.outputs.commit }}
           git tag -fa stable -m “stable”
           git push --tags --force
