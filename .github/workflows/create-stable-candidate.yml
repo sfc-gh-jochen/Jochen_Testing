@@ -1,4 +1,4 @@
-  name: "Create Stable Candidate"
+name: "Create Stable Candidate"
 
 on:
   workflow_dispatch:
