@@ -1,0 +1,22 @@
+name: "Merge Gates for Snowtrail"
+
+on:
+  pull_request:
+    paths:
+
+permissions:
+  contents: read
+
+jobs:
+
+  merge-gate-black-formatter:
+    runs-on:  ubuntu-latest
+    steps:
+      - name: "Fetching Code and Setting up Python Environment"
+        id: s1
+        uses: snowflakedb/snowtrail@master
+        
+      - name: Black Formatting
+        if: ${{ steps.s1.outputs.CHANGE_SET != '' }}
+        run: |
+          black ${{steps.s1.outputs.CHANGE_SET}} --check --verbose -l 100    
