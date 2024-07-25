@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
       - name: "Create Stable Candidate Branch"
         run: |
+          git config --global user.email "github@github.com"
+          git config --global user.name "GitHub Action Bot"
           git checkout -b stable-candidate-${{ steps.get_time.outputs.today }}
           git push --set-upstream origin stable-candidate-${{ steps.get_time.outputs.today }}
         
