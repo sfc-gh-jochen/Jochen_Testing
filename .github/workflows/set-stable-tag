@@ -1,0 +1,29 @@
+name: "Set Stable Tag"
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_branch:
+          description: 'Candidate Branch Name'
+          required: true
+          type: string
+  
+permissions:
+  contents: write
+
+jobs:
+
+  create_stable_candidate:
+    runs-on:  ubuntu-latest
+    steps:     
+      - name: "Checkout"      
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: "Set Stable Tag"
+        run: |
+          git switch ${{ inputs.candidate_branch }} 
+          git tag -fa stable -m “stable”
+          git push --tags --force
+
+        
