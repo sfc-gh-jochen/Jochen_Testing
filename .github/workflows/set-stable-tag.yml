@@ -20,11 +20,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: "Set Stable Tag"
+      - name: "Get Commit ID"
+        id: get_commit
         run: |
-          git rev-parse origin/${{ inputs.candidate_branch }} 
-          #git switch ${{ inputs.candidate_branch }} 
-          #git tag -fa stable -m “stable”
-          #git push --tags --force
+          echo "commit=$(git rev-parse origin/${{ inputs.candidate_branch }})" >> $GITHUB_OUTPUT 
+      - name: "Checkout commit and apply tag"
+        run: |
+          git checkout ${{ steps.get_commit.outputs.commit }}
+          git tag -fa stable -m “stable”
+          git push --tags --force
 
         
