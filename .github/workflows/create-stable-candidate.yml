@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: "GetTime"
         id: get_time
-        run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB.OUTPUTS
+        run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: "Checkout"      
         uses: actions/checkout@v4
         with:
