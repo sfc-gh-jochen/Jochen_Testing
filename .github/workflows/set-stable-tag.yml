@@ -22,8 +22,9 @@ jobs:
           fetch-depth: 0
       - name: "Set Stable Tag"
         run: |
-          git switch ${{ inputs.candidate_branch }} 
-          git tag -fa stable -m “stable”
-          git push --tags --force
+          git rev-parse origin/${{ inputs.candidate_branch }} 
+          #git switch ${{ inputs.candidate_branch }} 
+          #git tag -fa stable -m “stable”
+          #git push --tags --force
 
         
